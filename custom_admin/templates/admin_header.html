@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> Admin Panel </title>
+  <style>
+    h2.card-title.card-title-dash.text-white.mb-4 {
+      text-align: center;
+  }
+
+  .card .card-title.card-title-dash {
+    font-size:23px !important;
+  }
+
+  h2.card-title.card-title-dash.text-white.mb-4.value {
+    padding-top: 54px;
+    font-size:32px !important;
+    padding-bottom:38px;
+}
+  </style>
+  {% load static %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typicons/typicons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/simple-line-icons/css/simple-line-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/css/vendor.bundle.base.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/select.dataTables.min.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/css/vertical-layout-light/style.css' %}">
+
+  <link rel="shortcut icon" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/images/favicon.png' %}" />
+</head>
+<body>
+        {% include 'navbar.html' %}
+
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            {% include 'sidebar.html' %}
+
+            <div class="main-panel">
+              <div class="content-wrapper">
+                <div class="row">
+                  <div class="col-lg-4 d-flex flex-column">
+                    <div class="row flex-grow">
+                      <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+                        <div class="card bg-primary card-rounded">
+                          <div class="card-body pb-0">
+                            <h2 class="card-title card-title-dash text-white mb-4">Total Customer</h2>
+                            <h2 class="card-title card-title-dash text-white mb-4 value">{{customercount}}</h2>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-flex flex-column">
+                    <div class="row flex-grow">
+                      <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+                        <div class="card bg-primary card-rounded">
+                          <div class="card-body pb-0">
+                            <h2 class="card-title card-title-dash text-white mb-4">Total Product</h2>
+                            <h2 class="card-title card-title-dash text-white mb-4 value">{{productcount}}</h2>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-flex flex-column">
+                    <div class="row flex-grow">
+                      <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+                        <div class="card bg-primary card-rounded">
+                          <div class="card-body pb-0">
+                            <h2 class="card-title card-title-dash text-white mb-4">Total Orders</h2>
+                            <h2 class="card-title card-title-dash text-white mb-4 value">{{ordercount}}</h2>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+              </div>
+              <hr>
+              <div class="container" >
+                  <div class="panel panel-primary" >
+                    <div class="panel-heading" style="text-align:center;">
+                      <h3 class="card-title text-info" style="text"><b>Recent Booking</b></h3>
+                    </div>
+                    <table class="table table-hover table-striped" id="dev-table">
+                      <thead>
+                        <tr>
+                          <th>Customer Name</th>
+                          <th>Customer Mobile</th>
+                          <th>Shipment Address</th>
+                          <th>Product Name</th>
+                          <th>Product Picture</th>
+                          <th>Quantity</th>
+                          <th>Status</th>
+
+                        </tr>
+                      </thead>
+                      {% for product,customer,order in data %}
+                      <tr>
+                        {% for c in customer %}
+                        <td> {{c.name}}</td>
+                        <td>{{c.phone_number}}</td>
+                        <td>{{c.address}}</td>
+
+                        {% endfor %}
+                        {% for p in product %}
+                        <td> {{p.productname}}</td>
+                        <td> <img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/products/' %}{{p.image}}" alt="Profile Pic" height="40px" width="40px" /></td>
+                        <td>{{order.quantity}}</td>
+
+                        {% if order.status == 'Pending'%}
+                        <td> <span class="label label-info badge badge-warning">{{order.status}}</span></td>
+                        {% elif order.status == 'Delivered' %}
+                        <td> <span class="label label-success badge badge-success">{{order.status}}</span></td>
+                        {% elif order.status == 'Out for Delivery' %}
+                        <td> <span class="label label-warning badge badge-info">{{order.status}}</span></td>
+                        {% elif order.status == 'Order Confirmed' %}
+                        <td> <span class="label label-warning badge badge-success">{{order.status}}</span></td>
+                        {%else%}
+                          <td> <span class="label label-primary badge badge-danger">{{order.status}}</span></td>
+                        {%endif%}
+
+                        {% endfor %}
+                      </tr>
+                      {% endfor %}
+                    </table>
+                  </div>
+                  <hr>
+
+            </div>
+            <!-- partial -->
+            
+        
+
+       
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © <script>document.write(new Date().getFullYear());</script>. All rights reserved.</span>
+          </div>
+        </footer>
+
+    </div>
+
+    {% load static %}
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+     <!-- inject:js -->
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/js/vendor.bundle.base.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typeahead.js/typeahead.bundle.min.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/off-canvas.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/hoverable-collapse.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/template.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/settings.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/todolist.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <!--<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/dashboard.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/Chart.roundedBarCharts.js' %}"></script>
+  End custom js for this page-->
+</body>
+</html>

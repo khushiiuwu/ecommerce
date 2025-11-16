@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> Admin Login </title>
+  {% load static %}
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/mdi/css/materialdesignicons.min.css'%}">
+  <link rel="stylesheet" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/ti-icons/css/themify-icons.css'%}">
+  <link rel="stylesheet" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typicons/typicons.css'%}">
+  <link rel="stylesheet" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/simple-line-icons/css/simple-line-icons.css'%}">
+  <link rel="stylesheet" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/css/vendor.bundle.base.css'%}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/css/vertical-layout-light/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/images/favicon.png' %}" />
+  <style>
+    /* Add custom CSS for error message */
+    .error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+        border-color: #f5c6cb;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-center py-5 px-4 px-sm-5">
+              
+              <h4>VogueVault Admin 55</h4>
+              <h6 class="fw-light"></h6>
+              <form class="pt-3" action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                      {% for message in messages %}
+                          <div class="error-message">{{ message }}</div>
+                      {% endfor %}
+                </div>
+
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control form-control-lg" id="id_email" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control form-control-lg" id="id_password" placeholder="Password" required>
+                </div>
+                <div class="my-2 d-flex justify-content-center align-items-center">
+                  <div class="form-check">
+                    <button type="submit" style="border:none"><a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"> LOGIN </a></button>
+                  </div>
+                </div>
+               
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/js/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/off-canvas.js' %}"></script>
+  <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/template.js' %}"></script>
+  <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/settings.js' %}"></script>
+  <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/todolist.js' %}"></script>
+  <!-- endinject -->
+</body>
+
+</html>

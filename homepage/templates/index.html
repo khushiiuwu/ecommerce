@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            table, th, td{
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        
+            li{
+                list-style-type:none;
+            }
+
+            li,a{
+                text-align:right;
+            }
+            
+            ul li{
+                }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li><a href="user_profile">User Profile </a></li>
+            <li><a href="cart"> Cart </a></li>
+            <li><a href="orderhistory"> Order History </a></li>
+            <li><a href="logout"> Logout </a></li>
+        </ul>
+        <h1>Product List</h1>
+            <table>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Brand</th>
+            <th>Action</th>
+        </tr>
+        {% load static %}
+
+        {% for product in products %}
+        <tr>
+            <td>{{product.id}}</td>
+            <td><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/media/' %}{{product.image}}" alt="product_name" width="300px" height="300px"></td>
+            <td>{{ product.productname }}</td>
+            <td class="qty-input"><input type="number" value="1" min="1" data-id="{{product.id}}" class="product-data" name="qty" max="{{ product.quantity }}"></td>
+            <td>{{ product.status }}</td>
+            <td>{{ product.brand }}</td>
+            <td><a href="javascript:void(0)" class="add-to-cart">Add to Cart</a></td>
+    {% endfor %}
+    </table>
+    <script>
+        jQuery(".add-to-cart").click(function(){
+            var qty = jQuery(this).parent("td").siblings(".qty-input").children(".product-data").val();
+            var prd_id = jQuery(this).parent("td").siblings(".qty-input").children(".product-data").attr("data-id");
+
+            window.location.href = "http://127.0.0.1:8000/home/main/cart/?product_id=" + prd_id + "&qty=" + qty; 
+        });
+    </script>
+    </body>
+</html>

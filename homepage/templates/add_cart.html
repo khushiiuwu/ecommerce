@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+  
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap4" />
+  
+        {% load static %}
+          <!-- Bootstrap CSS -->
+          <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/bootstrap.min.css' %}" rel="stylesheet">
+          <link href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet' %}">
+          <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/tiny-slider.css' %}" rel="stylesheet">
+          <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/style.css' %}" rel="stylesheet">
+          <title> Cart </title>
+          <style>
+              hr:not([size]) {
+                margin-top: -2rem;
+            }
+            .product-thumbnail .img-fluid {
+              width: auto;
+              height: 150px;
+            }
+            .before-footer-section {
+              padding: 1rem 0 12rem 0 !important; 
+            }
+          </style>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+      </head>
+  
+      <body>
+    <!-- Start Header/Navigation -->
+		{% include 'header.html' %}
+		<!-- End Header/Navigation -->
+
+        <!-- Start Hero Section -->
+              <div class="hero">
+                  <div class="container">
+                      <div class="row justify-content-between">
+                          <div class="col-lg-5">
+                              <div class="intro-excerpt">
+                                  <h1>Cart</h1>
+                              </div>
+                          </div>
+                          <div class="col-lg-7">
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          <!-- End Hero Section -->
+  
+          
+  
+          <div class="untree_co-section before-footer-section">
+              <div class="container">
+                <div class="row mb-5">
+                  
+                    <div class="site-blocks-table">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="product-thumbnail">Image</th>
+                            <th class="product-name">Product</th>
+                            <th class="product-price">Price</th>
+                            <th class="product-quantity">Quantity</th>
+                            <th class="product-total">Total</th>
+                            <th class="product-remove">Remove</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for cart in carts %}
+                          <tr>
+                            <td class="product-thumbnail">
+                              {% load static %}
+                              <img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/products/'%}{{cart.img}} " alt="Image" class="img-fluid">
+                            </td>
+                            <td class="product-name">
+                              <h2 class="h5 text-black">{{cart.productdetails}} </h2>
+                            </td>
+                            <td>&#8377;{{cart.price}}</td>
+                            <td>
+                              <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                                <div class="input-group-prepend">
+                                  <button id="remove-product-{{cart.prod_id}}"class="btn btn-outline-black decrease" type="button">&minus;</button>
+                                </div>
+                                <input type="text" id="{{cart.prod_id}}" class="form-control text-center quantity-amount" value="{{cart.qty}}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                <div class="input-group-append">
+                                  <button id="add-product-{{cart.prod_id}}" class="btn btn-outline-black increase" type="button">&plus;</button>
+                                </div>
+                              </div>
+                            </td>
+                            <td>&#8377;{{cart.total}}</td>
+                           
+                            
+                            <td><a href="{% url 'remove_cart' cart.prod_id %}"  id="{{cart.prod_id}}" class="btn btn-black btn-sm">X</a></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+          
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row mb-5">
+                      <!--<div class="col-md-6 mb-3 mb-md-0">
+                        <button class="btn btn-black btn-sm btn-block">Update Cart</button>
+                      </div>-->
+                      <div class="col-md-6">
+                        <button class="btn btn-outline-black btn-sm btn-block" id="gotoshop">Continue Shopping</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label class="text-black h4" for="coupon">Coupon</label>
+                      </div>
+                      <div class="col-md-8 mb-3 mb-md-0">
+                        <input type="text" class="form-control py-3" id="coupon-form" name="coupon" placeholder='Enter Coupon Code'>
+                      </div>
+                      <div class="col-md-4">
+                        <button class="btn btn-black" id="apply-coupon" class="apply-coupon"> Apply Coupon</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 pl-5">
+                    <div class="row justify-content-end">
+                      <div class="col-md-7">
+                        <div class="row">
+                          <div class="col-md-12 text-right border-bottom">
+                            <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col-md-6">
+                            <span class="text-black">Subtotal</span>
+                          </div>
+                          <div class="col-md-6 text-right">
+                            <strong class="text-black sbtotal">&#8377;{{total}}</strong>
+                          </div>
+                        </div>
+                        <div class="row mb-5">
+                          <div class="col-md-6">
+                            <span class="text-black">Discount</span>
+                          </div>
+                          <div class="col-md-6 text-right">
+                            <strong class="text-black" id="discount">0</strong>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row mb-6">
+                          <div class="col-md-6">
+                            <span class="text-black">Total</span>
+                          </div>
+                          <div class="col-md-6 text-right">
+                            <strong class="text-black" >&#8377;<span id="tprice">0</span></strong>
+                          </div>
+                        </div>
+                        
+          
+                        <div class="row">
+                          <div class="col-md-12">
+                            <button id="checkout" class="btn btn-black" style="margin-top: 3rem;">Proceed To Checkout</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+  
+          <!-- Start Footer Section -->
+		<footer class="footer-section">
+			<div class="container relative">
+
+				<div class="sofa-img">
+					<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/fit.png' %}" width="180px" height="180px" alt="Image" class="img-fluid">
+				</div>
+
+				</div>
+
+				<div class="border-top copyright">
+					<div class="row pt-4">
+						<div class="col-lg-6">
+							<p class="mb-2 text-center text-lg-start">&nbsp;&nbsp; Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. 
+            </p>
+						</div>
+
+						
+					</div>
+				</div>
+
+			</div>
+		</footer>
+		<!-- End Footer Section -->
+          <script>
+              jQuery('#gotoshop').on('click', function(e){
+                  window.location.href="http://127.0.0.1:8000/home/shop/";
+                  console.log("http://127.0.0.1:8000/home/shop/");
+              });
+          </script>
+        
+        <script>
+          function removeExtraParamsFromCartUrl() {
+            // Get the current URL
+            var currentUrl = window.location.href;
+        
+            // Remove everything after '/cart/' in the URL
+            var newUrl = currentUrl.split('/cart/')[0] + '/cart/';
+        
+            // Update the browser's address bar without reloading the page
+            history.pushState({ path: newUrl }, '', newUrl);
+        }
+
+          jQuery(document).ready(function(){
+            jQuery("td").on("click", ".increase", function(e) {
+              //ProductID
+              removeExtraParamsFromCartUrl();
+              
+              var prod_id = jQuery(this).closest('.quantity-container').find('.quantity-amount').attr('id').trim();
+              console.log("Product ID",prod_id);
+
+              jQuery.ajax({
+                url: 'http://127.0.0.1:8000/home/add_qty/'+ prod_id ,
+                type: "GET",
+                success: function(response){
+                    console.log("Increased a Quantity in product Successfully!");
+                    // Reload the page
+                    location.reload();
+                }
+              });
+            });
+          });
+        </script>
+        <script>
+          function removeExtraParamsFromCartUrl() {
+            // Get the current URL
+            var currentUrl = window.location.href;
+        
+            // Remove everything after '/cart/' in the URL
+            var newUrl = currentUrl.split('/cart/')[0] + '/cart/';
+        
+            // Update the browser's address bar without reloading the page
+            history.pushState({ path: newUrl }, '', newUrl);
+        }
+
+          jQuery(document).ready(function(){
+            jQuery("td").on("click", ".decrease", function(e) {
+              //ProductID
+              removeExtraParamsFromCartUrl();
+
+              var prod_id = jQuery(this).closest('.quantity-container').find('.quantity-amount').attr('id');
+              console.log("Product ID",prod_id);
+
+              jQuery.ajax({
+                url: 'http://127.0.0.1:8000/home/remove_qty/'+ prod_id ,
+                type: "GET",
+                success: function(response){
+                    console.log("Decreased Quantity in a product Successfully!");
+                    // Reload the page
+                    location.reload();
+                }
+              });
+            });
+          });
+        </script>
+        <script>
+          jQuery(document).ready(function(){
+              var totalval = $('.sbtotal').text().replace("\u20b9",'');
+              $('#tprice').text(totalval);
+  
+              jQuery("#apply-coupon").click(function(e) {
+
+                  var coupon_name = jQuery("#coupon-form").val();
+
+              jQuery.ajax({
+                  url: 'http://127.0.0.1:8000/home/cart/coupon/' ,
+                  type: "POST",
+                  data: {"coupon_name":coupon_name},
+                  success: function(response){
+
+                      var total_amount = response.amount.total_amount
+                      var discounted_amount = response.amount.discounted_amount
+
+                      jQuery("#discount").html(discounted_amount);
+                      jQuery("#tprice").text(total_amount);
+
+
+                  }
+                });
+             });
+            });
+      </script>
+
+      <script>
+
+          jQuery(document).ready(function(){
+              var prod_id = [];
+              var qty = [];
+
+              jQuery(".quantity-amount").each(function () {
+                  var value =$(this).attr('id').trim();
+                  var val = $(this).attr('value').trim();
+                  prod_id.push(value);
+                  qty.push(val);
+              });
+
+                console.log("Quantity",qty);
+                console.log("Product ID", prod_id);
+
+            jQuery('#checkout').click( function(e){
+              console.log("Clicked!");
+              var url = 'http://127.0.0.1:8000/home/cart/checkout/?';
+              var total_amt_afterdiscount = parseFloat($('#tprice').text());
+              console.log("Total Amount After Discount", total_amt_afterdiscount);
+              url += 'total='+ total_amt_afterdiscount + '&';
+              
+              for (var i = 0; i < prod_id.length; i++) {
+                  url += 'prod_id[]=' + prod_id[i] + '&';
+                  console.log(prod_id);
+              }
+              
+              for (var i = 0; i < qty.length; i++) {
+                  url += 'quantity[]=' + qty[i] + '&';
+              }
+
+              // Remove the last '&' character
+              url = url.slice(0, -1);
+
+              // Redirect to the URL
+              window.location.href = url;
+            })
+          });
+          
+      </script>
+
+          <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/bootstrap.bundle.min.js' %}"></script>
+          <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/tiny-slider.js' %}"></script>
+          <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/custom.js' %}"></script>
+      </body>
+<!--<html>
+    <body>
+        <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <h1> Cart </h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            {% for cart in carts %}
+            <tr>
+                <td>{{cart.id}}</td>
+                <td>{{cart.productdetails}}</td>
+                <td>{{cart.price}}</td>
+                <td>{{cart.qty}}</td>
+                <td>{{cart.total}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="javascript:void(0)" id="apply-coupon" class="apply-coupon">Apply Coupon</a></td>
+                <td><input type="text" id="coupon-form" class="coupon-form" name="coupon"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Price</td>
+                <td>{{total}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Discount</td>
+                <td id="discount">0</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total Price</td>
+                <td id="tprice">{{total}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="checkout" >Checkout</a></td>
+            </tr>
+            {{request.session.total}}
+        </table> 
+        
+   </body>
+</html>-->

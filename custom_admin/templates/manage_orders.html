@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> Manage Orders </title>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  {% load static %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typicons/typicons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/simple-line-icons/css/simple-line-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/css/vendor.bundle.base.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/select.dataTables.min.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/css/vertical-layout-light/style.css' %}">
+
+  <link rel="shortcut icon" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/images/favicon.png' %}" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+        
+    <div class="container-scroller"> 
+        <!-- partial:partials/_navbar.html -->
+        {% include 'navbar.html' %}
+
+
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            {% include 'sidebar.html' %}
+
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% if messages %}
+                                        <div class="messages">
+                                            {% for message in messages %}
+                                                <div class="alert alert-{{ message.tags }}">
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>   
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 grid-margin stretch-card">
+                          <div class="card">
+                              <div class="card-body">
+                                  <div class="dropdown" style="position: relative; display: inline-block; float: right;">                                      
+                                      <select class="btn btn-sm btn-outline-primary dropdown-toggle" name="dropdown"  id="dropdown_order">
+                                        <option value="" onclick></option>
+                                        <option value="All Orders" onclick>All Orders</option>
+                                        <option value="Pending" onclick>Orders Pending</option>
+                                        <option value="Order Confirmed" onclick>Order Confirmed</option>
+                                        <option value="Out for Delivery" onclick>Out for Delivery</option>
+                                        <option value="Delivered" onclick>Delivered</option>
+                                    </select>
+                                  </div>
+                                    <h4 class="card-title">Manage Orders</h4>
+                                      <div class="table-responsive pt-3">
+                                          <table class="table table-bordered">
+                                              <thead>
+                                                  <tr>
+                                                        <th> Unique ID </th>
+                                                        <th> Order id </th>
+                                                        <th> Product Name </th>
+                                                        <th> Product Quantity  </th>                                                 
+                                                        <th> User ID</th>
+                                                        <th> Status</th>
+                                                        <th> Actions</th>
+                                                </tr>
+                                                  </thead>
+                                              <tbody>
+                                                  {% load static %}
+                                                  {% for order in orders %}
+                                                  <tr class="order-row" data-status="{{ order.status }}">
+                                                      <td>{{order.id}}</td>
+                                                      <td>{{order.orderid}}</td>
+                                                      <td>{{order.products}}</td>
+                                                      <td>{{order.quantity}}</td>
+                                                      <td>{{order.userid}}</td>
+                                                      <td>{{order.status}}</td>
+                                                      <td><a href="{% url 'edit_order' order.id %}">Update</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                          <a href="{% url 'delete_order' order.id %}" onclick="confirmDelete('{{ order.id }}', '{{ order.products}}')">Delete</a></td>
+                                                  </tr>
+                                              </tbody>
+                                              {% endfor %}
+                                          </table>
+                                          <nav aria-label="" style="margin-top: 2rem;">
+                                            <ul id="pagination" class="pagination pagination-lg justify-content-center">
+                                              {%if page_obj.has_previous %} {# whether the previous page exists #}
+                                              <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li> {# link to the prev page #}
+                                              {% endif %}
+                                              {% for pages in page_iterate %}
+                                                {% if page_obj.number == pages %}
+                                                <li class="page-item disabled active"><a class="page-link" href="javascript:void(0)"><span class="currentpage">{{pages}}</span></a></li> {# the current page number #}
+                                                {% else %}
+                                                <li class="page-item"><a class="pagenumber page-link"  id="{{pages}}"><span>{{pages}}</span></a></li>
+                                                {% endif %}
+                                              {% endfor %}
+                                              {%if page_obj.has_next %} {# whether the next page exists #}
+                                              <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li> {# link to the next page #}
+                                              {% endif %}
+                                            </ul>
+                                          </nav>
+                                      </div>
+                            </div>
+                          </div>
+                        </div>
+                                                              
+                        <footer class="footer">
+                          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+                              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
+                          </div>
+                      </footer>
+                      </div> 
+                </div> 
+          </div> 
+
+          <script>
+
+            $(document).ready(function(){
+              var pagenumber = document.getElementById ("pagination").getElementsByTagName ("li").length;
+              if (pagenumber  <=1) {
+                $("#pagination").hide();
+              }
+            });
+      
+            var currentUrl = $(location).attr('href');
+            var newUrl;
+            console.log(currentUrl);
+            $('.pagenumber').on("click", function(e){
+               e.preventDefault();
+               var number = $(this).attr("id");
+               if (currentUrl.indexOf('page=') > -1) {
+                // If it does, replace the value
+                newUrl = currentUrl.replace(/([&?]page=)[^\&]+/, '$1' + number); // Replace the page parameter value
+                console.log(newUrl);
+                window.location.href = newUrl;
+      
+              } 
+              else {
+                // If it doesn't, add the page parameter
+                if (currentUrl.indexOf('?') > -1) {
+                  // If the URL already has a query string
+                  newUrl = currentUrl + '&page=' + number;
+                  console.log(newUrl);
+                  window.location.href = newUrl;
+                }
+                else{
+                  newUrl = currentUrl + '?page=' + number;
+                  console.log(newUrl);
+                  window.location.href = newUrl;
+                }
+                
+              }
+            });
+      
+          </script>
+<script>
+    function confirmDelete(productId, productName) {
+        if (confirm('Are you sure you want to delete ' + productName + '?')) {
+            if (confirm('Are you REALLY sure you want to delete ' + productName + '?')) {
+                var deleteUrl = "{% url 'delete_order' 0 %}".replace('0', productId);
+                window.location.href = deleteUrl;
+            }
+        }
+    }
+</script>
+
+<script>
+  jQuery('#dropdown_order').on('change', function(){
+    var selectedChange = this.value;
+    window.location.href = "http://127.0.0.1:8000/admin/manage_orders/?sortby=" + selectedChange;
+  });
+
+
+  {% comment %}
+    document.getElementById('dropdown_order').addEventListener('change', function() {
+      var selectedStatus = this.value;
+      var orderRows = document.getElementsByClassName('order-row');
+  
+      for (var i = 0; i < orderRows.length; i++) {
+        var rowStatus = orderRows[i].getAttribute('data-status');
+        
+        if (selectedStatus === 'All Orders' || selectedStatus === rowStatus) {
+          orderRows[i].style.display = 'table-row';
+  
+        } else {
+          orderRows[i].style.display = 'none';
+        }
+      }
+    });
+  {% endcomment %}
+</script>
+
+{% load static %}
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+ <!-- inject:js -->
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/js/vendor.bundle.base.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typeahead.js/typeahead.bundle.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/off-canvas.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/hoverable-collapse.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/template.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/settings.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/todolist.js' %}"></script>
+<!-- endinject -->
+
+</body>
+</html>

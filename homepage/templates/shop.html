@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+        {% load static %}
+        <!-- Bootstrap CSS -->
+        <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet' %}">
+        <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/tiny-slider.css' %}" rel="stylesheet">
+        <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/style.css' %}" rel="stylesheet">
+	
+		<title> Shop </title>
+		<style>
+	
+
+			.list-unstyled.categories{
+				padding-top: 1rem;
+			}
+			.list-unstyled.categories h5{
+				margin-top: .5rem;
+			}
+			.list-unstyled.categories li:not(:last-child){
+				border-bottom: 1px solid #000;
+			}
+			.product-section .col-md-3{
+				background-color: #d9d6eb;
+			}
+			.page-item.disabled.active .page-link {
+				color: #f9f9fc !important;
+				background-color: #112a46;
+			}
+			.pagination-lg .page-link {
+				padding: 0.5rem 1rem;
+				font-size: 1.2rem;
+			}
+			.product-thumbnail{
+				width:200px;
+				height:300px;
+			}
+
+			
+
+			.navbar-expand-md .navbar-nav .dropdown-menu {
+				margin-top: 19px !important;
+			}
+
+			.form-control.searchbar:focus{
+				outline:none;
+
+			  }
+
+			  .button {
+				background: none;
+				border: none;
+				cursor: pointer;
+			  }
+			
+			  .searchbar{
+				position: absolute;
+				width: 603px;
+				right: 250px;
+				top: 18px;
+				/* transition: visible 2s ease 0s; */
+			
+			  }
+
+			  .mt-3 {
+				margin-top: 0rem !important;
+			}
+
+			a.page-link {
+				color: #756ab6 !important;
+			}
+
+			a.page-link:hover {
+				color: #112A46 !important;
+			}
+		</style>
+		<style>
+			section {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				flex-direction: column;
+			  }
+			  
+			  h1 {
+				font-size: 40px;
+			  }
+			  
+			  a {
+				position: relative;
+				text-decoration: none;
+			  }
+			  
+			  a:after {
+				
+				width: 0;
+				height: 2px;
+				display: block;
+				margin-top: 0px;
+				left: 0%;
+				background: black;
+				transition: width .3s ease;
+			  }
+			  
+			  a:hover:after{
+				width: 100%;
+				left: 0%;
+				background: black;
+			  }
+			  
+			  .cursor {
+				width: 50px;
+				height: 50px;
+				border-radius: 100%;
+				border: 1px solid #4d494a;
+				transition: all 200ms ease-out;
+				position: fixed;
+				pointer-events: none;
+				left: 0;
+				top: 0;
+				z-index:9;
+				transform: translate(calc(-50% + 15px), -50%);
+			  }
+			  
+			  .cursor2 {
+				width: 20px;
+				height: 20px;
+				border-radius: 100%;
+				background-color: #4d494a;
+				opacity: .3;
+				position: fixed;
+				transform: translate(-50%, -50%);
+				pointer-events: none;
+				z-index:9;
+				transition: width .3s, height .3s, opacity .3s;
+			  }
+			  
+			  .hover {
+				background-color: #4d494a;
+				opacity: 0.5;
+			  }
+			  
+			  .cursorinnerhover {
+				width: 50px;
+				height: 50px;
+				opacity: .5;
+			  }
+		</style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		<div class="cursor"></div>
+		<div class="cursor2"></div>
+        <!-- Start Header/Navigation -->
+		{% include 'header.html' %}
+		<!-- End Header/Navigation -->
+
+		<!-- Start Hero Section -->
+			<div class="hero">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col-lg-5">
+							<div class="intro-excerpt">
+								<h1>Shop</h1>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr style= "border: none; width: 92.2%;border-bottom: 1px black; margin: 25px auto;">
+
+		<!-- End Hero Section -->
+
+		
+
+		<div class="untree_co-section product-section before-footer-section" style="margin-top: -3rem;">
+		    <div class="container" style="margin-top: -3rem !important;">
+				<div class="row align-items-center mb-5">
+					<div class="col-lg-8">
+					  <h2 class="mb-3 mb-lg-0">Category</h2>
+					</div>
+					<div class="col-lg-4">
+			
+					  <div class="d-flex sort align-items-center justify-content-lg-end">
+						<strong class="mr-3">Sort by:</strong>
+						<form action="#">
+						  <select class=""  id="dropdown_products">
+							<option value="featured">Featured</option>
+							<option value="new-items" >Newest Items</option>
+							<option value="best-selling">Best Selling</option>
+							<option value="lowtohigh">Price: Low to High</option>
+							<option value="hightolow">Price: High to Low</option>
+							<option value="rating">Rating: Avg Customer Reviews</option>
+						  </select>
+						</form>
+					  </div>
+					</div>
+				  </div>
+		      	<div class="row">
+					<div class="col-md-3">
+						<ul class="list-unstyled categories">
+
+						{% for category in categories %}
+						  <li><h5><a href="#" id="{{category.0}}" class="catname">{{category.0}} <span>{{category.1}}</span></a></h5></li>
+						{% endfor %}
+						</ul>
+					  </div>
+					  
+		      		<!-- Start Column 1 -->
+					<div class="col-md-9">
+						<div class="row">
+						{% for product in products.object_list  %}
+							<div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
+								<a class="product-item order-row" href="#" data-status="{{ product.price }}">
+									<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/products/' %}{{product.image}}" class="img-fluid product-thumbnail" >
+									<h3 class="product-title"  >{{product.productname}}</h3>
+									<strong class="product-price">&#8377;{{product.price}}</strong>
+
+									<span class="icon-cross">
+										<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/cross.svg' %}" id="{{product.id}}" class="img-fluid add-to-cart">
+									</span>
+								</a>
+							</div> 
+							{% endfor %}
+							<!-- End Column 1 -->
+						</div>
+						{% comment %} <nav aria-label="...">
+							<ul class="pagination pagination-lg justify-content-center">
+							  <li class="page-item disabled">
+								<a class="page-link" href="#" tabindex="-1">1</a>
+							  </li>
+							  <li class="page-item"><a class="page-link" href="#">2</a></li>
+							  <li class="page-item"><a class="page-link" href="#">3</a></li>
+							</ul>
+						</nav> {% endcomment %}
+						<nav aria-label="" style="margin-top: 2rem;">
+							<ul id="pagination" class="pagination pagination-lg justify-content-center">
+								{%if page_obj.has_previous %} {# whether the previous page exists #}
+								<li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li> {# link to the prev page #}
+								{% endif %}
+								{% for pages in page_iterate %}
+									{% if page_obj.number == pages %}
+									<li class="page-item disabled active"><a class="page-link" href="javascript:void(0)"><span class="currentpage">{{pages}}</span></a></li> {# the current page number #}
+									{% else %}
+									<li class="page-item"><a class="pagenumber page-link"  id="{{pages}}"><span>{{pages}}</span></a></li>
+									{% endif %}
+								{% endfor %}
+								{%if page_obj.has_next %} {# whether the next page exists #}
+								<li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li> {# link to the next page #}
+								{% endif %}
+							</ul>
+						</nav>
+					</div>
+		      	</div>
+		    </div>
+		</div>
+
+
+		<!-- Start Footer Section -->
+		<footer class="footer-section">
+			<div class="container relative">
+
+				<div class="sofa-img">
+					<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/fit.png' %}" width="180px" height="180px" alt="Image" class="img-fluid">
+				</div>
+
+				<div class="row">
+					
+				</div>
+
+				<div class="border-top copyright">
+					<div class="row pt-4">
+						<div class="col-lg-6">
+							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. 
+            </p>
+						</div>
+
+						<div class="col-lg-6 text-center text-lg-end">
+						
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</footer>
+		<!-- End Footer Section -->
+		<script>
+			$(document).ready(function(){
+				var pagenumber = document.getElementById ("pagination").getElementsByTagName ("li").length;
+				if (pagenumber  <=1) {
+					$("#pagination").hide();
+				}
+			});
+
+			var currentUrl = $(location).attr('href');
+			var newUrl;
+			console.log(currentUrl);
+			$('.pagenumber').on("click", function(e){
+				 e.preventDefault();
+				 var number = $(this).attr("id");
+				 if (currentUrl.indexOf('page=') > -1) {
+					// If it does, replace the value
+					newUrl = currentUrl.replace(/([&?]page=)[^\&]+/, '$1' + number); // Replace the page parameter value
+					console.log(newUrl);
+					window.location.href = newUrl;
+
+				} 
+				else {
+					// If it doesn't, add the page parameter
+					if (currentUrl.indexOf('?') > -1) {
+						// If the URL already has a query string
+						newUrl = currentUrl + '&page=' + number;
+						console.log(newUrl);
+						window.location.href = newUrl;
+					}
+					else{
+						newUrl = currentUrl + '?page=' + number;
+						console.log(newUrl);
+						window.location.href = newUrl;
+					}
+					
+				}
+			});
+
+		</script>
+		<script>
+			
+			var cursor = document.querySelector('.cursor');
+			var cursorinner = document.querySelector('.cursor2');
+			var a = document.querySelectorAll('a');
+
+			document.addEventListener('mousemove', function(e){
+			var x = e.clientX;
+			var y = e.clientY;
+			cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`
+			});
+
+			document.addEventListener('mousemove', function(e){
+			var x = e.clientX;
+			var y = e.clientY;
+			cursorinner.style.left = x + 'px';
+			cursorinner.style.top = y + 'px';
+			});
+
+			document.addEventListener('mousedown', function(){
+			cursor.classList.add('click');
+			cursorinner.classList.add('cursorinnerhover')
+			});
+
+			document.addEventListener('mouseup', function(){
+			cursor.classList.remove('click')
+			cursorinner.classList.remove('cursorinnerhover')
+			});
+
+			a.forEach(item => {
+			item.addEventListener('mouseover', () => {
+				cursor.classList.add('hover');
+			});
+			item.addEventListener('mouseleave', () => {
+				cursor.classList.remove('hover');
+			});
+			})
+		</script>
+		<script>
+
+			jQuery('#dropdown_products').on('change', function(){
+				var selectedChange = this.value;
+				window.location.href = "http://127.0.0.1:8000/home/shop/?sortby=" + selectedChange;
+			});
+
+			jQuery('.catname').on('click', function(e){
+				e.preventDefault();
+				var categoryname =  $(this).attr('id');
+				window.location.href = "http://127.0.0.1:8000/home/shop/?category=" + categoryname;
+			});
+		</script>
+
+		<script>
+			jQuery(".add-to-cart").click(function(){
+				var qty = 1;
+				var prd_id = $(this).attr("id");
+				
+				window.location.href = "http://127.0.0.1:8000/home/cart/?product_id=" + prd_id + "&qty=" + qty; 
+			});
+		</script>
+
+		<script>
+			jQuery(".product-thumbnail").click(function(){
+				var prod_id = jQuery(this).closest('.product-item').find('.add-to-cart').attr("id");
+				console.log("Product ID:", prod_id);
+				window.location.href = 'http://127.0.0.1:8000/home/shop/product_details/?product_id='+ prod_id	;
+			});
+
+			var getUrlParameter = function getUrlParameter(sParam) {
+				var sPageURL = window.location.search.substring(1),
+					sURLVariables = sPageURL.split('&'),
+					sParameterName,
+					i;
+			
+				for (i = 0; i < sURLVariables.length; i++) {
+					sParameterName = sURLVariables[i].split('=');
+			
+					if (sParameterName[0] === sParam) {
+						return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+					}
+				}
+				return false;
+			};
+	     
+		</script>
+
+		<script>
+			jQuery(document).ready(function() {
+
+				var sort = getUrlParameter("sortby");
+
+				jQuery("#dropdown_products").val(sort).attr("selected", true);
+
+				$('.collapsed').hide();
+			jQuery('#showcollapsed').on('click', function (){
+				$('.collapsed').toggle();
+			});
+		});
+		</script>
+
+		
+
+		<script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/tiny-slider.js' %}"></script>
+		<script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/custom.js' %}"></script>
+	</body>
+
+</html>

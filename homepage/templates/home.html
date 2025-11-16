@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+        
+        {% load static %}
+
+		<!-- Bootstrap CSS -->
+		<link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/tiny-slider.css' %}" rel="stylesheet">
+		<link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/style.css' %}" rel="stylesheet">
+		<title> VogueVault. </title>
+		<style>
+			img.img-fluid.product-thumbnail {
+				height: 352px !important;
+				width: 264px !important;
+			}
+
+			.hero .hero-img-wrap img {
+				right: -22px !important;
+				height: 619px !important;
+				width: 430px !important;
+			}
+
+			
+
+			.navbar-expand-md .navbar-nav .dropdown-menu {
+				margin-top: 19px !important;
+			}
+
+			a.nav-link.search {
+				width: 26px;
+			}
+
+			.container.serch {
+				width: 58px;
+			}
+
+			.search-container {
+				display: flex;
+				align-items: center;
+				margin: 0;
+				padding: 0;
+			  }
+		  
+			  {% comment %}
+				.form-control.searchbar {
+					width: 114%;
+					border: none;
+					border-radius:0px;
+					margin-left:-86px;
+					margin-top: -15px;
+				  }
+			  {% endcomment %}
+			  
+			  .form-control.searchbar:focus{
+				outline:none;
+
+			  }
+
+			  .button {
+				background: none;
+				border: none;
+				cursor: pointer;
+			  }
+			
+			  .searchbar{
+				position: absolute;
+				width: 603px;
+				right: 250px;
+				top: 18px;
+				/* transition: visible 2s ease 0s; */
+			
+			  }
+
+			  .mt-3 {
+				margin-top: 0rem !important;
+			}
+
+			
+		</style>
+		<style>
+			section {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				flex-direction: column;
+			  }
+			  
+			  h1 {
+				font-size: 40px;
+			  }
+			  
+			  a {
+				position: relative;
+				text-decoration: none;
+			  }
+			  
+			  a:after {
+				
+				width: 0;
+				height: 2px;
+				display: block;
+				margin-top: 0px;
+				left: 0%;
+				background: black;
+				transition: width .3s ease;
+			  }
+			  
+			  a:hover:after{
+				width: 100%;
+				left: 0%;
+				background: black;
+			  }
+			  
+			  .cursor {
+				width: 50px;
+				height: 50px;
+				border-radius: 100%;
+				border: 1px solid #4d494a;
+				transition: all 200ms ease-out;
+				position: fixed;
+				pointer-events: none;
+				left: 0;
+				top: 0;
+				z-index:9;
+				transform: translate(calc(-50% + 15px), -50%);
+			  }
+			  
+			  .cursor2 {
+				width: 10px;
+    			height: 10px;
+				border-radius: 100%;
+				background-color: #4d494a;
+				position: fixed;
+				transform: translate(-50%, -50%);
+				pointer-events: none;
+				z-index:9;
+				transition: width .3s, height .3s, opacity .3s;
+			  }
+			  
+			  .hover {
+				background-color: #4d494a;
+				opacity: 0.5;
+			  }
+			  
+			  .cursorinnerhover {
+				width: 50px;
+				height: 50px;
+				opacity: .5;
+			  }
+		</style>
+		<style>
+			.btn.btn-white-outline{
+				overflow:hidden;
+				position: relative;
+			}
+			.btn.btn-white-outline:hover {
+				border-color: transparent;
+			}
+			.btn.btn-white-outline:hover:after {
+				opacity: 1;
+				width: 116%;
+			}
+			
+			.btn.btn-white-outline:after {
+				background: transparent linear-gradient(94deg, #f5104996 0%, #fe648d 47%, #b05ede 100%) 0% 0% no-repeat padding-box;
+				content: '';
+				position: absolute;
+				transform: skew(-20deg);
+				width: 0;
+				top: 0;
+				left: 0;
+				display: block;
+				transition: all 0.4s cubic-bezier(0.2, 0.95, 0.57, 0.99);
+				opacity: 0;
+			}
+			
+			.btn.btn-white-outline:hover:before {
+				opacity: 1;
+				width: 110%;
+			}
+			
+			
+			.btn.btn-white-outline:before {
+				background: transparent linear-gradient(94deg, #f51049 0%, #fe648d 47%, #b05ede 100%) 0% 0% no-repeat padding-box;
+				content: '';
+				height: 100%;
+				position: absolute;
+				transform: skew(-20deg);
+				width: 0;
+				top: 0;
+				left: -3px;
+				display: block;
+				transition: all 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+				opacity: 1;
+				z-index: -3;
+			}
+		</style>
+		<style>
+			.explorenow{
+				font-weight: 600;
+				padding: 12px 30px;
+				border-radius: 30px;
+				border-color: #112A46 !important;
+				overflow:hidden;
+				position: relative;
+				    z-index: 11;
+			}
+			.explorenow:hover {
+				border-color: transparent;
+			}
+			.explorenow:hover:after {
+				opacity: 1;
+				width: 116%;
+			}
+			
+			.explorenow:after {
+				background: transparent linear-gradient(94deg, #000000 0%, #53346D  51%, #000000 100%) 0% 0% no-repeat padding-box !important;
+				content: '';
+				position: absolute;
+				transform: skew(-20deg);
+				width: 0;
+				top: 0;
+				left: 0;
+				display: block;
+				transition: all 0.4s cubic-bezier(0.2, 0.95, 0.57, 0.99);
+				opacity: 0;
+			}
+			
+			.explorenow:hover:before {
+				opacity: 1;
+				width: 110%;
+			}
+			
+			
+			.explorenow:before {
+				background: transparent linear-gradient(94deg, #000000 0%, #53346D  51%, #000000 100%) 0% 0% no-repeat padding-box !important;
+				content: '';
+				height: 100%;
+				position: absolute;
+				transform: skew(-20deg);
+				width: 0;
+				top: 0;
+				left: -3px;
+				display: block;
+				transition: all 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+				opacity: 1;
+				z-index: -3;
+			}
+		</style>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js'></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<script src="//code.tidio.co/fhxcnvbqgtan4nhzzuqy4btorjhu9fkg.js" async></script>
+
+		
+	</head>
+
+	<body>
+		<div class="cursor"></div>
+		<div class="cursor2"></div>
+		<!-- Start Header/Navigation -->
+		
+		{% include 'header.html' %}
+				
+		<!-- End Header/Navigation -->
+
+		<!-- Start Hero Section -->
+			<div class="hero">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col-lg-5">
+							<div class="intro-excerpt">
+								<h1> Discover and Find Your Own Fashion!  <span clsas="d-block"></span></h1>
+								<p class="mb-4">Explore our curated collection of stylish clothing and accessories tailored to your unique taste.</p>
+								<p><a href="" class="btn btn-secondary me-2 shopnow">Shop Now</a><a href="{% url 'about_us' %}" class="btn btn-white-outline">Explore</a></p>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="hero-img-wrap">
+								<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/fix_photo.png' %}" class="img-fluid">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> 
+
+		<!-- End Hero Section -->
+		<hr style= "border: none; width: 92.2%;border-bottom: 1px black; margin: 25px auto;">
+
+		<!-- Start Product Section -->
+		<div class="product-section">
+			<div class="container">
+				<div class="row">
+					<!-- Start Column 1 -->
+					<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+						<h2 class="mb-4 section-title">Crafted with excellent material.</h2>
+						<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. </p>
+						<p><a href="{% url 'shop' %}" class="btn explorenow">Explore now!</a></p>
+					</div> 
+					<!-- End Column 1 -->
+
+					<!-- Start Column 2 -->
+					{% for product in display_products %}
+					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+						<a class="product-item" href="javascript:void(0)">
+							<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/products/' %}{{product.image}}" class="img-fluid product-thumbnail">
+							<h3 class="product-title">{{product.productname}}</h3>
+							<strong class="product-price">Starting from &#8377; {{product.price}}</strong>
+						</a>
+					</div> 
+					{% endfor %}
+					<!-- End Column 2 -->
+
+
+				</div>
+			</div>
+		</div>
+		<!-- End Product Section -->
+
+		<!-- Start Why Choose Us Section -->
+		<div class="why-choose-section">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-6">
+						<h2 class="section-title">Why Choose Us</h2>
+						<p>Choose us for exceptional quality and unmatched expertise, where your satisfaction is our commitment.</p>
+
+						<div class="row my-5">
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/truck.svg' %}" alt="Image" class="imf-fluid">
+									</div>
+									<h3>Fast &amp; Free Shipping</h3>
+									<p>No extra cost, ensuring your items arrive when you need them most.</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/bag.svg' %}" alt="Image" class="imf-fluid">
+									</div>
+									<h3>Easy to Shop</h3>
+									<p>User-friendly platform, making your shopping experience hassle-free and enjoyable.</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/support.svg' %}" alt="Image" class="imf-fluid">
+									</div>
+									<h3>24/7 Support</h3>
+									<p>Our dedicated support team is here around the clock to assist you with any inquiries or concerns!</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/return.svg' %}" alt="Image" class="imf-fluid">
+									</div>
+									<h3>Hassle Free Returns</h3>
+									<p>Return process ensures a stress-free experience if your purchase doesn't meet your expectations.</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-lg-5">
+						<div class="img-wrap">
+							<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/why-choose-us-op.jpeg' %}" alt="Image" class="img-fluid">
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- End Why Choose Us Section -->
+
+		<!-- Start We Help Section -->
+		<div class="we-help-section">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-7 mb-5 mb-lg-0">
+						<div class="imgs-grid">
+							<div class="grid grid-1"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/contemporary-1.jpg' %}" alt="Untree.co"></div>
+						</div>
+					</div>
+					<div class="col-lg-5 ps-lg-5">
+						<h2 class="section-title mb-4">Elevate Your Wardrobe</h2>
+						<p>Experience fashion reinvented with our wardrobe essentials. Our carefully curated collections embody the latest trends, ensuring you're always at the forefront of style. Explore our selection:</p>
+
+						<ul class="list-unstyled custom-list my-4">
+							<li>Elevate your look effortlessly with trendy designed pieces.</li>
+							<li>Stay ahead with trends reflecting your personality.</li>
+							<li>Embrace comfort and quality!</li>
+							<li>Join us on a journey of self-expression and confidence.</li>
+						</ul>
+						<p><a href="#" class="btn explore">Explore</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End We Help Section -->
+
+
+		<!-- Start Testimonial Slider -->
+		<div class="testimonial-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7 mx-auto text-center">
+						<h2 class="section-title">Testimonials</h2>
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-lg-12">
+						<div class="testimonial-slider-wrap text-center">
+
+							<div id="testimonial-nav">
+								<span class="prev" data-controls="prev"><span class="fa fa-chevron-left"></span></span>
+								<span class="next" data-controls="next"><span class="fa fa-chevron-right"></span></span>
+							</div>
+
+							<div class="testimonial-slider">
+								
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
+
+											<div class="testimonial-block text-center">
+												<blockquote class="mb-5">
+													<p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.&rdquo;</p>
+												</blockquote>
+
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/person-1.png' %}" alt="Maria Jones" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">Maria Jones</h3>
+													<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div> 
+								<!-- END item -->
+
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
+
+											<div class="testimonial-block text-center">
+												<blockquote class="mb-5">
+													<p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.&rdquo;</p>
+												</blockquote>
+
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/person-1.png' %}" alt="Maria Jones" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">Maria Jones</h3>
+													<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div> 
+								<!-- END item -->
+
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
+
+											<div class="testimonial-block text-center">
+												<blockquote class="mb-5">
+													<p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.&rdquo;</p>
+												</blockquote>
+
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/person-1.png' %}" alt="Maria Jones" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">Maria Jones</h3>
+													<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div> 
+								<!-- END item -->
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Testimonial Slider -->
+	
+		<!-- Start Footer Section -->
+		<footer class="footer-section">
+			<div class="container relative">
+
+				<div class="sofa-img">
+					<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/fit.png' %}" width="180px" height="180px" alt="Image" class="img-fluid">
+				</div>
+
+				<div class="row g-5 mb-5">
+					<div class="col-lg-4">
+						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">VogueVault<span>.</span></a></div>
+						<p class="mb-4">
+							Elevate your wardrobe with VogueVault. , where fashion meets versatility. Explore our curated collection of stylish apparel designed to empower your unique style journey. Join our community and step into a world of timeless elegance and effortless sophistication</p>
+
+						<ul class="list-unstyled custom-social">
+							<li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+						</ul>
+					</div>
+
+
+				</div>
+
+				<div class="border-top copyright">
+					<div class="row pt-4">
+						<div class="col-lg-6">
+							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. 
+            </p>
+						</div>
+
+						<div class="col-lg-6 text-center text-lg-end">
+							<ul class="list-unstyled d-inline-flex ms-auto">
+								<li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</footer>
+				<!-- End Footer Section -->	
+		<script>
+			
+			var cursor = document.querySelector('.cursor');
+			var cursorinner = document.querySelector('.cursor2');
+			var a = document.querySelectorAll('a');
+
+			document.addEventListener('mousemove', function(e){
+			var x = e.clientX;
+			var y = e.clientY;
+			cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`
+			});
+
+			document.addEventListener('mousemove', function(e){
+			var x = e.clientX;
+			var y = e.clientY;
+			cursorinner.style.left = x + 'px';
+			cursorinner.style.top = y + 'px';
+			});
+
+			document.addEventListener('mousedown', function(){
+			cursor.classList.add('click');
+			cursorinner.classList.add('cursorinnerhover')
+			});
+
+			document.addEventListener('mouseup', function(){
+			cursor.classList.remove('click')
+			cursorinner.classList.remove('cursorinnerhover')
+			});
+
+			a.forEach(item => {
+			item.addEventListener('mouseover', () => {
+				cursor.classList.add('hover');
+			});
+			item.addEventListener('mouseleave', () => {
+				cursor.classList.remove('hover');
+			});
+			})
+		</script>
+		
+		<script>
+			jQuery('.explore').on('click', function(e){
+					e.preventDefault();
+					var categoryname =  "Dresses";
+					window.location.href = "http://127.0.0.1:8000/home/shop/?category=" + categoryname;
+				});
+		</script>
+
+		<script>
+			jQuery('.shopnow').on('click', function(e){
+					e.preventDefault();
+					window.location.href = "{% url 'shop' %}";
+			});
+		</script>
+		<script>
+			jQuery(document).ready(function() {
+				//jQuery('.collapsed').hide();
+				jQuery('#showcollapsed').on('click', function (){
+					jQuery('.collapsed').toggle("slow");
+				});
+			});
+		</script>
+
+		<script>
+			$('.searchbar').on('keypress',function(e) {
+				
+				if(e.which == 13) {
+					e.preventDefault();
+					var query = $('.searchbar').val();
+
+					window.location.href = "http://127.0.0.1:8000/home/shop/?query=" + query;
+					console.log(window.location.href);
+				}
+			});
+		</script>
+
+		<script>
+
+			$('.product-thumbnail').on('click', function(e){
+				var query = $(this).closest('.product-item').find('.product-title').text();
+
+				window.location.href = "{% url 'shop' %}?query=" + encodeURIComponent(query);
+			});
+		</script>
+
+		<script src="{%static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{%static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/tiny-slider.js' %}"></script>
+		<script src="{%static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/custom.js' %}"></script>
+	</body>
+
+</html>

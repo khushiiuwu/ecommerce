@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> User Details</title>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  {% load static %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typicons/typicons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/simple-line-icons/css/simple-line-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/css/vendor.bundle.base.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/select.dataTables.min.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/css/vertical-layout-light/style.css' %}">
+
+  <link rel="shortcut icon" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/images/favicon.png' %}" />
+</head>
+<body>
+        
+    <div class="container-scroller"> 
+        <!-- partial:partials/_navbar.html -->
+        {% include 'navbar.html' %}
+
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            {% include 'sidebar.html' %}
+            
+            <!-- partial -->
+            
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% if messages %}
+                                        <div class="messages">
+                                            {% for message in messages %}
+                                                <div class="alert alert-{{ message.tags }}">
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>   
+                            </div>
+                        </div>
+            
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                              <div class="card-body">
+                                <h4 class="card-title"></h4>
+                                <p class="card-description"> </p>
+                                <form method="POST" action="{% url 'user' users.id %}" enctype='multipart/form-data'>
+                                    <div class="form-group">
+                                        <label for="name"> Name</label>
+                                        <input type="text" class="form-control" name="name" id="id_name" value="{{users.name}}" placeholder="Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email"> email</label>
+                                        <input type="email" class="form-control" name="email" id="id_email" value="{{users.email}}" placeholder="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address"> Address </label>
+                                        <input type="text" class="form-control" name="address" id="id_address" value="{{users.address}}" placeholder="address">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone_number"> Phone number </label>
+                                        <input type="text" class="form-control" name="phone_number" id="id_phone_number" value="{{users.phone_number}}" placeholder="phone_number" maxlength="10">
+                                    </div>
+                                    
+                                    <button type="submit" id="my-button" class="btn btn-primary me-2">Submit</button>
+                                    <button class="btn btn-light"><a href="{% url 'manage_orders' %}">Cancel</a></button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+       
+                        <footer class="footer">
+                            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+                                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+  
+    {% load static %}
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+     <!-- inject:js -->
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/js/vendor.bundle.base.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typeahead.js/typeahead.bundle.min.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/off-canvas.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/hoverable-collapse.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/template.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/settings.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/todolist.js' %}"></script>
+  <!-- endinject -->
+
+</body>
+</html>

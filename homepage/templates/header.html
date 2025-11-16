@@ -1,0 +1,97 @@
+<html>
+<head></head>
+<style>
+    .searchbar{
+        position: absolute;
+        width: 603px;
+        right: 250px;
+        top: 18px;
+        /* transition: visible 2s ease 0s; */
+    
+      }
+      .searchbar:focus{
+        outline:none;
+
+      }
+
+      .mt-3 {
+        margin-top: 0rem !important;
+    }
+
+    .navbar-expand-md .navbar-nav .dropdown-menu {
+        margin-top: 19px !important;
+    }
+</style>
+<body>
+    <header>
+        <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+			<div class="container">
+				<a class="navbar-brand" href="http://127.0.0.1:8000/home/">VogueVault<span>.</span></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li class="nav-item active">
+							<a class="nav-link" href="http://127.0.0.1:8000/home/">Home</a>
+						</li>
+						<li><a class="nav-link" href="{% url 'shop' %}?sortby=new-items">Shop</a></li>
+						<li><a class="nav-link" href="{% url 'about_us' %}">About us</a></li>
+						<li><a class="nav-link" href="{% url 'contact_us' %}">Contact us</a></li>
+					</ul>
+					
+					
+					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+                        {% load static%}
+						<li class="user-icon"><a class="nav-link" id="showcollapsed" href="#"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/search.svg' %}"></a></li>
+
+						<div class="user-icon dropdown">
+							<li>
+								<a class="nav-link useract" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/user.svg' %}"></a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<li><a class="dropdown-item" href="{% url 'user_profile' %}">User Profile</a></li>
+									<li><a class="dropdown-item" href="{% url 'wishlist' %}">Wishlist</a></li>
+									<li><a class="dropdown-item" href="{% url 'my_order' %}">Orders</a></li>
+									<li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+								</ul>
+							</li>
+						  </div>
+						  <li class="user-icon"><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/cart.svg' %}"></a></li>
+
+
+
+
+					</ul>
+				</div>
+			</div>
+				
+		</nav>
+        <div class="container mt-3 collapsed">
+			<form action="">
+				<input type="search" class="form-control searchbar" placeholder="Search...">		  
+			  </form>
+		</div>
+    </header>
+    <script>
+        jQuery(document).ready(function() {
+            $('.collapsed').hide();
+
+            jQuery('#showcollapsed').on('click', function (){
+                $('.collapsed').toggle();
+                });
+        });
+
+        jQuery('.searchbar').on('keypress',function(e) {
+            if(e.which == 13) {
+                e.preventDefault();
+                var query = $('.searchbar').val();
+                console.log(query);
+
+                window.location.href = "http://127.0.0.1:8000/home/shop/?query=" + query;
+            }
+        });
+    </script>
+</body>

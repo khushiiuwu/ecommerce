@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> Add Orders </title>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  {% load static %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typicons/typicons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/simple-line-icons/css/simple-line-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/css/vendor.bundle.base.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/select.dataTables.min.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/css/vertical-layout-light/style.css' %}">
+
+  <link rel="shortcut icon" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/images/favicon.png' %}" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+        {% include 'navbar.html' %}
+
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            {% include 'sidebar.html' %}
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% if messages %}
+                                        <div class="messages">
+                                            {% for message in messages %}
+                                                <div class="alert alert-{{ message.tags }}">
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>   
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 grid-margin stretch-card">
+                          <div class="card">
+                              <div class="card-body">
+                                    <h4 class="card-title"></h4>
+                                    <p class="card-description"> </p>
+                                    <form method="POST" action="{% url 'add_orders' %}" enctype='multipart/form-data'>
+                                        <div class="form-group">
+                                            <label for="productname">Product</label>
+                                            <select class="form-control" name="product" value="{{products.id}}" id="id_productname" >
+                                                {% for product in products %}
+                                                <option value="{{product.id}}">{{product.id}}&nbsp;&nbsp;{{product.productname}}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <span class="input-group-append">
+                                                <button class="add-product" type="button">Add Product</button>
+                                              </span>
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">User</label>
+                                            <select class="form-control" name="name"  id="id_name" onchange="userAddress(this.value)">
+                                                {% for user in users %}
+                                                <option value="{{user.id}}">{{user.id}}&nbsp;{{user.name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                              <label for="address">Billing Address</label>  
+                                              <label for="address" class="user_billing_address"></label><br /><br />
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                              <label for="address">Shipping Address</label>                                        
+                                              <label for="address" class="user_shipping_address"></label><br /><br /><br />   
+                                          </div>                                     
+                                        </div>
+
+                                        <div class="col-lg-12 grid-margin stretch-card">
+                                          <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="card-title"></h4>
+                                                <p class="card-description"></p>
+                                              <div class="table-responsive">
+                                                <table id="productTable" class="table table-hover">
+                                                  <thead>
+                                                    <tr>
+                                                      <th>Product Name</th>
+                                                      <th>Qty</th>
+                                                      <th>Price</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+  
+                                                  </tbody>
+                                                  <tfoot>
+                                                    <tr>
+                                                      <td></td>
+                                                      <td>Total</td>
+                                                      <td id="total-price">0.00</td>
+                                                    </tr>
+                                                  </tfoot>
+                                                </table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <button type="submit" id="my-button" class="btn btn-primary me-2">Place Order</button>
+                                        <button class="btn btn-light"><a href="{% url 'update_product' %}">Cancel</a></button>
+                                    </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                                                              
+                        <footer class="footer">
+                          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+                              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
+                          </div>
+                      </footer>
+                      </div> 
+                </div> 
+          </div> 
+
+
+<script>
+  function userAddress(userId) {
+    $.ajax({
+        url: 'http://127.0.0.1:8000/admin/user_address/' + userId,  
+        type: 'GET',
+        //data: { 'userId': userId },
+        success: function (response) {
+            $('.user_billing_address').text(response.context.billing_address);
+            $('.user_shipping_address').text(response.context.shipping_address);
+        },
+    });
+}
+</script>
+
+<script>
+  jQuery(document).ready(function(){
+    jQuery(".add-product").click(function(e) {
+    e.preventDefault();
+    var productId = document.getElementById('id_productname').value;
+      $.ajax({
+        url: 'http://127.0.0.1:8000/admin/user_order/' + productId,  
+        type: 'GET',
+        //data: { 'userId': userId },
+        success: function (response) {
+          var table = $('#productTable tbody');
+          var existingRow = table.find('tr[data-id="' + response.product.id + '"]');
+
+          if (existingRow.length > 0) {
+            // Product already exists 
+            var quantityInput = existingRow.find('.product-data-qty');
+            var quantity = parseInt(quantityInput.val()) + 1;
+            quantityInput.val(quantity);
+
+            // Update total price
+            var totalPrice = quantity * response.product.price;
+            existingRow.find('.price').text(totalPrice.toFixed(2));
+
+
+          } else {
+            // Product doesn't exist 
+            var newRow = '<tr data-id="' + response.product.id + '" class="product-data-tab">' +
+                            '<td>' + response.product.productname + '</td>' +
+                            '<td>' + "<input type='number' value='1' min='1' data-price='" + response.product.price + "' data-id='" + response.product.id + "' class='product-data-qty' name='qty' max='" + response.product.quantity + "'>" +  '</td>' +
+                            '<td class="price">' + response.product.price + '</td>' +
+                          '</tr>';
+            table.prepend(newRow);
+            
+            var grandtotal = 0.00;
+
+            jQuery(".product-data-tab").each( function () {
+             
+                var quantity = parseInt($(this).find('.product-data-qty').val());     
+                    
+                var price = parseFloat($(this).find('.price').text());
+
+                var total = (quantity * price);
+
+                grandtotal = grandtotal + total;
+              
+                $(this).find('.price').text(total.toFixed(2));
+              
+                //var row = $(this).closest("table");
+
+                $("#total-price").text(grandtotal.toFixed(2));
+             
+            });
+
+            $(document).on("change", ".product-data-qty", function(){
+
+                var quantity = $(this).val();
+
+                var price = $(this).attr("data-price");
+
+                var total = (quantity * price);
+
+                //var totalprice = $('#total-price').text(total.toFixed(2));
+                var totalprice = 0;
+
+                $(this).parent("td").next(".price").first().text(total.toFixed(2));
+
+                $('.price').each(function() {
+                    if($(this).html()){
+                      totalprice += parseFloat($(this).html());
+                      console.log("TotalPrice"+totalprice); 
+                    }
+                });
+
+                $("#total-price").text(totalprice.toFixed(2));
+
+            });
+
+          }
+    },
+          });
+        });
+      });
+</script>
+<script>
+  jQuery("#my-button").click(function(e) {
+    e.preventDefault();
+    var userId = $("#id_name option:selected").attr("value");
+    console.log("User Id",userId);
+    console.log("Type", typeof userId);
+    var prodId = $(".product-data-tab");
+    var quantity = $(".product-data-qty");
+
+    var prodDetails = {};
+
+    // Use a single loop to iterate over both arrays
+    $.each(prodId, function (index, value) {
+      // Access the corresponding quantity using the loop index
+      var quantityValue = quantity.eq(index).val();
+
+      var product_id = jQuery(this).attr("data-id");
+
+      //var product_id = jQuery(".product-data-tab").eq(index).attr("data-id");
+
+      // Add the product ID and quantity to the prodDetails object
+      prodDetails[product_id] = quantityValue;
+    });
+
+    console.log("prodDetails Stored!", prodDetails);
+    $.ajax({
+      url: 'http://127.0.0.1:8000/admin/add_orders/place_order/',
+      type: 'POST',
+      data: {'userid': userId ,'prodDetails' : prodDetails},
+      success: function (response) {
+        console.log("Yay Placed the Order!");
+      },
+    });
+  });
+</script>
+
+{% load static %}
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+ <!-- inject:js -->
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/js/vendor.bundle.base.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typeahead.js/typeahead.bundle.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/off-canvas.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/hoverable-collapse.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/template.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/settings.js' %}"></script>
+<script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/todolist.js' %}"></script>
+<!-- endinject -->
+
+</body>
+</html>

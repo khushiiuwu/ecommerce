@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+        {% load static %}
+        <!-- Bootstrap CSS -->
+        <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet' %}">
+        <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/tiny-slider.css' %}" rel="stylesheet">
+        <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/style.css' %}" rel="stylesheet">
+	
+		<title> Your Wishlist is Empty :( </title>
+		<style>
+			.product-thumbnail{
+				width:200px;
+				height:300px;
+			}
+
+			.navbar-expand-md .navbar-nav .dropdown-menu {
+				margin-top: 19px !important;
+			}
+
+			.form-control.searchbar:focus{
+				outline:none;
+
+			  }
+
+			  .button {
+				background: none;
+				border: none;
+				cursor: pointer;
+			  }
+			
+			  .searchbar{
+				position: absolute;
+				width: 603px;
+				right: 253px;
+				top: 18px;
+				/* transition: visible 2s ease 0s; */
+			
+			  }
+
+			  .mt-3 {
+				margin-top: 0rem !important;
+			}
+
+            img.shop-cat {
+                width: 369px;
+                height: 353px;
+            }
+
+            .container.empty-shop {
+                margin-top: 75px;
+            }
+
+            h1.empty {
+                color: #112A46;
+            }
+
+            h6.empty-shop-sub {
+                margin-top: 20px;
+                color: #193e67;
+            }
+
+            input#search {
+                border-radius: 23px;
+                margin-top: 215px;
+                margin-left: 116px;
+            }
+
+            
+            img.cart-cat {
+                border: 5px solid black;
+            }
+
+            .empty-cart{
+                color:#112A46;
+            }
+
+            h5.empty-cart-sub {
+                color: #193e67;
+                margin-top: 23px;
+            }
+
+            button#gotoshop {
+                margin-top: 212px;
+                margin-left: 280px;
+            }
+		</style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+        <!-- Start Header/Navigation -->
+		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+			<div class="container">
+				<a class="navbar-brand" href="http://127.0.0.1:8000/home/">VogueVault<span>.</span></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li class="nav-item active">
+							<a class="nav-link" href="http://127.0.0.1:8000/home/">Home</a>
+						</li>
+						<li><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+						<li><a class="nav-link" href="{% url 'about_us' %}">About us</a></li>
+						<li><a class="nav-link" href="{% url 'contact_us' %}">Contact us</a></li>
+					</ul>
+					
+					
+					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+						<li><a class="nav-link" id="showcollapsed" href="#"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/search.svg' %}"></a></li>
+						<div class="dropdown">
+							<li>
+								<a class="nav-link useract" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/user.svg' %}"></a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<li><a class="dropdown-item" href="{% url 'user_profile' %}">User Profile</a></li>
+									<li><a class="dropdown-item" href="{% url 'wishlist' %}">Wishlist</a></li>
+									<li><a class="dropdown-item" href="{% url 'my_order' %}">Orders</a></li>
+									<li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+								</ul>
+							</li>
+						  </div>
+						  <li><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/cart.svg' %}"></a></li>
+
+					</ul>
+				</div>
+			</div>
+			
+		</nav>
+		<div class="container mt-3 collapsed">
+			<form action="">
+				<input type="search" class="form-control searchbar" placeholder="Enter keyword to search...">		  
+			  </form>
+		</div>
+		<!-- End Header/Navigation -->
+
+		<!-- Start Hero Section -->
+			
+		<!-- End Hero Section -->
+
+		
+        <div class="container empty-shop">
+            <div class="row">
+                <div class="col-lg-5">
+                    <img class="shop-cat" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/cat-product-not-found.png' %}">
+                </div>
+                <div class="col-lg-7">
+                    <h1 class="empty">Your Wishlist is Empty :(</h1>
+                    <h6 class="empty-shop-sub">Add A Product to Your Wishlist!</h6>
+                    <button class="btn btn-outline-black btn-sm btn-block" id="gotoshop">Continue Browsing</button>
+
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+		<!-- Start Footer Section -->
+		
+		<!-- End Footer Section -->
+		<script>
+			jQuery(document).ready(function() {
+				$('.collapsed').hide();
+			jQuery('#showcollapsed').on('click', function (){
+				$('.collapsed').toggle();
+			});
+		});
+		</script>
+
+		<script>
+			$('.searchbar').on('keypress',function(e) {
+				if(e.which == 13) {
+					e.preventDefault();
+					var query = $('.searchbar').val();
+
+					window.location.href = "{% url 'shop' %}?query=" + encodeURIComponent(query);
+				}
+			});
+		</script>
+
+        <script>
+            jQuery('#gotoshop').on('click', function(e){
+                window.location.href="http://127.0.0.1:8000/home/shop/";
+                console.log("http://127.0.0.1:8000/home/shop/");
+            });
+        </script>
+
+		<script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/tiny-slider.js' %}"></script>
+		<script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/custom.js' %}"></script>
+	</body>
+
+</html>

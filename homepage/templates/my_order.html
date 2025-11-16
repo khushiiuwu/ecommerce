@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+  
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap4" />
+      
+        {% load static %}
+          <!-- Bootstrap CSS -->
+          <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/bootstrap.min.css' %}" rel="stylesheet">
+          <link href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet' %}">
+          <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/tiny-slider.css' %}" rel="stylesheet">
+          <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/style.css' %}" rel="stylesheet">
+          <title> My Order </title>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <style>
+            .list-unstyled.categories{
+              padding-top: 1rem;
+            }
+            .list-unstyled.categories h5{
+              margin-top: .5rem;
+            }
+            .list-unstyled.categories li:not(:last-child){
+              border-bottom: 1px solid #000;
+            }
+            .product-section .col-md-3{
+              background-color: #d9d6eb;
+            }
+            .page-item.disabled.active .page-link {
+              color: #f9f9fc !important;
+              background-color: #112a46;
+            }
+            .pagination-lg .page-link {
+              padding: 0.5rem 1rem;
+              font-size: 1.2rem;
+            }
+
+            .before-footer-section {
+              padding: 1rem 0 12rem 0 !important;
+            }
+            .productlink{
+              text-decoration:none;
+            }
+
+            .text-muted{
+              font-size:16px;
+            }
+
+            .img-fluid {
+              max-width: 54% !important;
+          }
+
+          .status{
+              font-size:12px;
+          }
+          </style>
+</head>
+<body>
+    <!-- Start Header/Navigation -->
+		{% include 'header.html' %}
+		<!-- End Header/Navigation -->
+
+        <!-- Start Hero Section -->
+              <div class="hero">
+                  <div class="container">
+                      <div class="row justify-content-between">
+                          <div class="col-lg-5">
+                              <div class="intro-excerpt">
+                                  <h1>My Orders</h1>
+                              </div>
+                          </div>
+                          <div class="col-lg-7">
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          <!-- End Hero Section -->
+  
+          
+  
+          <div class="untree_co-section before-footer-section">
+              <div class="container">
+                <div class="row mb-5">
+                  
+                    <div class="site-blocks-table">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="product-thumbnail">Product</th>
+                            <th class="product-name"></th>
+                            <th class="product-price">Price</th>
+                            <th class="product-quantity">Quantity</th>
+                            <th class="product-total">Total</th>
+                            <th class="order-status">Track</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for order in orders %}
+                          <tr>
+                            <td class="product-thumbnail">
+
+                              {% load static %}
+                              <img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/products/'%}{{order.img}} " alt="Image" class="img-fluid productimage">
+                            </td>
+                            <td class="product-name">
+                              <h3 class="h6 text-black">    
+                                <a class="productlink" id="{{order.products}}" ><b>{{order.products}}</b></a><br /><br />
+                                {{order.orderid}} <br /><br />
+                                Order Status <span class="text-muted">{{order.status}}</span><br><br >
+
+                              </h3>
+                            </td>
+                            <td>&#8377;{{order.price}}</td>
+                            <td>{{order.quantity}}</td>
+
+                            <td>&#8377;{{order.total}}</td>
+                            <td><a class="ordertracking" id="{{order.id}}"><span id="ordersstatus" class="{{order.status}}"> Track Order </a> </td>
+
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                    <nav aria-label="" style="margin-top: 2rem;">
+                      <ul id="pagination" class="pagination pagination-lg justify-content-center">
+                        {%if page_obj.has_previous %} {# whether the previous page exists #}
+                        <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li> {# link to the prev page #}
+                        {% endif %}
+                        {% for pages in page_iterate %}
+                          {% if page_obj.number == pages %}
+                          <li class="page-item disabled active"><a class="page-link" href="javascript:void(0)"><span class="currentpage">{{pages}}</span></a></li> {# the current page number #}
+                          {% else %}
+                          <li class="page-item"><a class="pagenumber page-link"  id="{{pages}}"><span>{{pages}}</span></a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {%if page_obj.has_next %} {# whether the next page exists #}
+                        <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li> {# link to the next page #}
+                        {% endif %}
+                      </ul>
+                    </nav>
+                </div>
+          
+              </div>
+            </div>
+          
+  
+          <!-- Start Footer Section -->
+		<!-- End Footer Section -->
+    <script>
+			$(document).ready(function(){
+				var pagenumber = document.getElementById ("pagination").getElementsByTagName ("li").length;
+				if (pagenumber  <=1) {
+					$("#pagination").hide();
+				}
+			});
+
+			var currentUrl = $(location).attr('href');
+			var newUrl;
+			console.log(currentUrl);
+			$('.pagenumber').on("click", function(e){
+				 e.preventDefault();
+				 var number = $(this).attr("id");
+				 if (currentUrl.indexOf('page=') > -1) {
+					// If it does, replace the value
+					newUrl = currentUrl.replace(/([&?]page=)[^\&]+/, '$1' + number); // Replace the page parameter value
+					console.log(newUrl);
+					window.location.href = newUrl;
+
+				} 
+				else {
+					// If it doesn't, add the page parameter
+					if (currentUrl.indexOf('?') > -1) {
+						// If the URL already has a query string
+						newUrl = currentUrl + '&page=' + number;
+						console.log(newUrl);
+						window.location.href = newUrl;
+					}
+					else{
+						newUrl = currentUrl + '?page=' + number;
+						console.log(newUrl);
+						window.location.href = newUrl;
+					}
+					
+				}
+			});
+
+		</script>
+        <script>
+          jQuery('.orderdetails').on("click", function(){
+              var orderid = $(this).attr('data-id');
+              window.location.href = 'http://127.0.0.1:8000/home/order_details/?orderid='+ orderid;
+          });
+        </script>
+        <script>
+          jQuery('.productlink').hover(function() {
+            $(this).css("text-decoration", "underline");
+          });
+
+          jQuery('.ordertracking').on("click", function(){
+              var productname = $(this).closest('tr').find('.productlink').text();
+              var uniqueorderid = $(this).attr('id');
+              var orderstatus = $('#ordersstatus').attr('class'); 
+              window.location.href = "http://127.0.0.1:8000/home/trackorder/?orderstatus="+ orderstatus + "&id="+ uniqueorderid;
+          });
+
+          jQuery('.productlink').on("click", function(){
+              var productname = $(this).text();
+              var imageUrl = $(this).closest("tr").find('.productimage').attr("src");
+              var productimage = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+
+              window.location.href = 'http://127.0.0.1:8000/home/shop/product_details/?productname='+ productname + "&image="+ productimage;
+
+          });
+        </script>
+        <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/tiny-slider.js' %}"></script>
+        <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/custom.js' %}"></script>
+      </body>
+</html>
+<!--<html>
+    <body>
+        <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <h1> Cart </h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            {% for cart in carts %}
+            <tr>
+                <td>{{cart.id}}</td>
+                <td>{{cart.productdetails}}</td>
+                <td>{{cart.price}}</td>
+                <td>{{cart.qty}}</td>
+                <td>{{cart.total}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="javascript:void(0)" id="apply-coupon" class="apply-coupon">Apply Coupon</a></td>
+                <td><input type="text" id="coupon-form" class="coupon-form" name="coupon"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Price</td>
+                <td>{{total}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Discount</td>
+                <td id="discount">0</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total Price</td>
+                <td id="tprice">{{total}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="checkout" >Checkout</a></td>
+            </tr>
+            {{request.session.total}}
+        </table> 
+        
+   </body>
+</html>-->

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+  {% load static %}
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet' %}">
+  <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/tiny-slider.css' %}" rel="stylesheet">
+  <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/style.css' %}" rel="stylesheet">
+  <title> Checkout </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+	</head>
+
+	<body>
+
+		<!-- Start Header/Navigation -->
+		{% include 'header.html' %}
+		<!-- End Header/Navigation -->
+
+		<!-- Start Hero Section -->
+			<div class="hero">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col-lg-5">
+							<div class="intro-excerpt">
+								<h1>Checkout</h1>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- End Hero Section -->
+
+		<div class="untree_co-section">
+		    <div class="container">
+		      <div class="row">
+		        <div class="col-md-6 mb-5 mb-md-0">
+		          <h2 class="h3 mb-3 text-black">Billing Details</h2>
+		          <div class="p-3 p-lg-5 border bg-white">
+					
+					<form action="{% url 'checkout' %}" id="checkout-form" method="POST">	
+						<div class="form-group row">
+							<div class="col-md-12">
+								<label for="billing_address" class="text-black">Billing Address <span class="text-danger">*</span></label>
+								<input type="text" class="form-control" id="billing_address" name="billing_address" placeholder="Address">
+							</div>
+							</div>
+
+						<div class="form-group row">
+							<div class="col-md-12">
+								<label for="billing_city" class="text-black">Billing City <span class="text-danger">*</span></label>
+								<input type="text" class="form-control" id="billing_city" name="billing_city" placeholder="City">
+							</div>
+							</div>
+						
+						<div class="form-group row">
+						<div class="col-md-6">
+							<label for="billing_postcode" class="text-black">Billing Postcode <span class="text-danger">*</span></label>
+								<input type="text" class="form-control" id="billing_postcode" name="billing_postcode" maxlength=6 pattern="[0-9]{6}" placeholder="Postcode">
+						</div>
+						<div class="col-md-6">
+							<label for="billing_phonenumber" class="text-black">Billing Phone Number <span class="text-danger">*</span></label>
+								<input type="tel" class="form-control" id="billing_phonenumber" name="billing_phonenumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Phone Number">
+						</div>
+						</div>
+
+						<div class="form-group row">
+						<div class="col-md-12">
+							<label for="billing_email" class="text-black">Billing Email <span class="text-danger">*</span></label>
+								<input type="email" class="form-control" id="billing_email" name="billing_email"  placeholder="Email">
+						</div>
+						</div>
+
+							
+						<div class="form-group">
+						<label for="c_ship_different_address" class="text-black" data-bs-toggle="collapse" href="#ship_different_address" role="button" aria-expanded="false" aria-controls="ship_different_address"><input type="checkbox" value="1" id="c_ship_different_address"> Ship To A Different Address?</label>
+						<div class="collapse" id="ship_different_address">
+							<div class="py-2">
+							<div class="form-group row">
+								<div class="col-md-12">
+							<label for="shipping_address" class="text-black">Shipping Address <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="shipping_address" name="shipping_address" placeholder="Address">
+							</div>
+						</div>
+		
+						<div class="form-group row">
+							<div class="col-md-12">
+							<label for="shipping_city" class="text-black">Shipping City <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="shipping_city" name="shipping_city" placeholder="City">
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="col-md-6">
+							<label for="shipping_postcode" class="text-black">Shipping Postcode <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="shipping_postcode" name="shipping_postcode" maxlength=6 pattern="[0-9]{6}" placeholder="Postcode">
+							</div>
+							<div class="col-md-6">
+							<label for="shipping_phonenumber" class="text-black">Shipping Phone Number <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="shipping_phonenumber" name="shipping_phonenumber" maxlength=10 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Phone Number">
+							</div>
+						</div>
+		
+						<div class="form-group row">
+							<div class="col-md-12">
+							<label for="shipping_email" class="text-black">Shipping Email <span class="text-danger">*</span></label>
+							<input type="email" class="form-control" id="shipping_email" name="shipping_email"  placeholder="Email">
+							</div>
+						</div>
+					</form>
+		            </div>
+
+				</div>
+			</div>
+
+			</div>
+		</div>
+		        <div class="col-md-6">
+
+		          <div class="row mb-5">
+		            <div class="col-md-12">
+		              <h2 class="h3 mb-3 text-black">Your Order</h2>
+		              <div class="p-3 p-lg-5 border bg-white">
+		                <table class="table site-block-order-table mb-5">
+		                  <thead>
+		                    <th>Product</th>
+		                    <th>Total</th>
+		                  </thead>
+		                  <tbody>
+							{% for prod in my_dict %}
+		                    <tr>
+		                      <td class="value"> {{ prod.0 }} <strong class="mx-2">x</strong> {{ prod.1 }}</td>
+		                      <td class="amount">&#8377; {{ prod.2 }} </td>
+		                    
+							</tr>
+							{% endfor %}
+		                    
+		                    <tr>
+		                      <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
+		                      <td class="text-black ">&#8377;<span class="total"></span></td>
+		                    </tr>
+		                    <tr>
+		                      <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+		                      <td class="text-black font-weight-bold"><strong>&#8377;<span class="">{{total}}</span></strong></td>
+		                    </tr>
+		                  </tbody>
+		                </table>
+
+		                
+
+		                <div class="border p-3 mb-3">
+		                  <h3 class="h6 mb-0"><a class="d-block cashondelivery" data-bs-toggle="collapse"  role="button" aria-expanded="false" aria-controls="collapsecheque">COD (Cash On Delivery)</a></h3>
+
+		                  <div class="collapse" id="collapsecheque">
+		                    <div class="py-2">
+		                      <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+		                    </div>
+		                  </div>
+		                </div>
+
+		                <div class="border p-3 mb-5">
+		                  <h3 class="h6 mb-0"><a class="d-block" data-bs-toggle="collapse" id="pay-btn"  role="button" aria-expanded="false" aria-controls="collapsepaypal">Razorpay</a></h3>
+
+		                  <div class="collapse" id="collapsepaypal">
+		                    <div class="py-2">
+		                      <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+		                    </div>
+		                  </div>
+		                </div>
+
+		                <div class="collapse form-group" id="paymentcod">
+		                  <button class="btn btn-black btn-lg py-3 btn-block cashod">Place Order</button>
+		                </div>
+
+		              </div>
+		            </div>
+		          </div>
+
+		        </div>
+		      </div>
+		      <!-- </form> -->
+		    </div>
+		  </div>
+
+		<!-- Start Footer Section -->
+		<footer class="footer-section">
+			<div class="container relative">
+
+				<div class="sofa-img">
+					<img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/fit.png' %}" width="180px" height="180px" alt="Image" class="img-fluid">
+				</div>
+
+		
+
+				<div class="border-top copyright">
+					<div class="row pt-4">
+						<div class="col-lg-6">
+							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. 
+            </p>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</footer>
+		<!-- End Footer Section -->
+    <script>
+      jQuery(document).ready(function(){
+        jQuery("#c_ship_different_address").click(function(e) { 
+          if(jQuery(this).prop("checked")){
+            // If checkbox is checked, show the div
+            jQuery("#ship_different_address").show();
+        } else {
+            // If checkbox is unchecked, hide the div
+            jQuery("#ship_different_address").hide();
+          }
+        })
+      });
+    </script>
+
+	<script>
+			jQuery(document).ready(function(){
+				if($('#c_ship_different_address').prop("checked")){
+					alert("This box is checked so shipping address would be different!");
+				}
+				else{
+					alert("This box is not checked so shipping address would be same!");
+
+					jQuery('#billing_address').on("input", function(){
+						var address = $(this).val();
+						jQuery('#shipping_address').val(address);
+					});
+					
+					jQuery('#billing_city').on("input", function(){
+						var city = $(this).val();
+						jQuery('#shipping_city').val(city);
+					});
+
+					jQuery('#billing_postcode').on("input", function(){
+						var postcode = $(this).val();
+						jQuery('#shipping_postcode').val(postcode);
+					});
+					
+					jQuery('#billing_phonenumber').on("input", function(){
+						var phone = $(this).val();
+						jQuery('#shipping_phonenumber').val(phone);
+					});
+
+					jQuery('#billing_email').on("input", function(){
+						var email = $(this).val();
+						jQuery('#shipping_email').val(email);
+					});
+				}
+			})
+	</script>
+
+	<script>
+
+		 jQuery('.cashondelivery').on('click', function(e){
+			$("#paymentcod").toggle();
+		  });
+
+		jQuery('.cashod').on('click', function(e){
+			window.location.href = "http://127.0.0.1:8000/home/cart/checkout/thankyou/";
+		})
+	</script>
+
+	<script>
+		 jQuery(document).ready(function(){
+			var amounts = [];
+			var total = 0;
+
+			$('.amount').each(function() {
+				var amountText = $(this).text().trim(); // Get the text content of the element
+				var amountValue = parseFloat(amountText.replace('₹', '').trim()); // Remove currency symbol and trim whitespace
+				amounts.push(amountValue); // Push the extracted value to the amounts array
+				total = total + amountValue;
+			});
+			jQuery('.total').text(total);
+			console.log(amounts);
+		 });
+	</script>
+	
+	<script>
+			jQuery(document).ready(function(){
+			  jQuery("#pay-btn").click(function(e) {
+				console.log("Click");
+			  e.preventDefault();
+			  jQuery.ajax({
+				  url: "http://127.0.0.1:8000/home/cart/savecart/",
+				  type: "POST",
+				  data: jQuery("#checkout-form").serialize(),
+				  success: function(response){
+					  
+					  var options = {
+						key: response.context.razorpay_merchant_key,
+						amount: response.context.razorpay_amount, 
+						currency: "INR",
+						name: "ecommerce",
+						order_id: response.context.razorpay_order_id, 
+						callback_url: response.context.callback_url,
+						email: response.context.email,
+						coupon: response.context.coupon,
+					  };
+					  
+					  var rzp1 = new Razorpay(options);
+					  
+					  rzp1.open();
+				  }
+				});
+			 });
+			});
+		</script>
+		  
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/tiny-slider.js"></script>
+		<script src="js/custom.js"></script>
+	</body>
+
+</html>
+

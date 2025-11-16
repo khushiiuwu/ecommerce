@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylsheet" href="product.css">
+    </head>
+<body>
+    <div id=>
+        <form method="POST" action="{% url 'product' %}" enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit"> Submit </button>
+            <img id="output">
+        </form>
+
+    </div>
+    <script>
+        const element = document.getElementById("id_image");
+        element.addEventListener("change",myFunction);
+        function myFunction(event) {
+            var output = document.getElementById("output");
+            output.style.display = "block";
+            output.src = URL.createObjectURL(this.files[0]);
+        }
+    </script>
+</body>
+</html>

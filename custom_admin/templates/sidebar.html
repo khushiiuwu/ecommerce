@@ -1,0 +1,93 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'admin_panel' %}">
+          <i class="mdi mdi-grid-large menu-icon"></i>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item nav-category">PRODUCTS</li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#manage-product" aria-expanded="false" aria-controls="ui-basic">
+          <i class="menu-icon mdi mdi-pencil-box"></i>
+          <span class="menu-title">Manage Products</span>
+          <i class="menu-arrow"></i> 
+        </a>
+        <div class="collapse" id="manage-product">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'add_product' %}">Add Products</a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'update_productdetails' %}">Update Products</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item nav-category">Order Management</li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#manage-order" aria-expanded="false" aria-controls="ui-basic">
+          <i class="menu-icon mdi mdi-poll-box"></i>
+          <span class="menu-title">Manage Orders</span>
+          <i class="menu-arrow"></i> 
+        </a>
+        <div class="collapse" id="manage-order">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'add_orders' %}">Add Order</a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'manage_orders' %}">Update Order </a>
+            </li>
+            
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item nav-category">Category</li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#manage-category" aria-expanded="false" aria-controls="ui-basic">
+          <i class="menu-icon mdi mdi-card-text-outline"></i>
+          <span class="menu-title">Manage Category</span>
+          <i class="menu-arrow"></i> 
+        </a>
+        <div class="collapse" id="manage-category">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'category' %}">Add Category</a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'update_category' %}">Update Category</a>
+            </li>
+            
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item nav-category ">Feedback</li>
+      <li class="nav-item feedback">
+        <a class="nav-link" data-bs-toggle="collapse" href="{% url 'manage_feedback' %}" aria-expanded="false" aria-controls="auth">
+          <i class="menu-icon mdi mdi-account-card-details"></i>
+          <span class="menu-title">Manage Feedback</span>
+        </a>
+      </li>
+
+      <li class="nav-item nav-category ">USERS</li>
+      <li class="nav-item users">
+        <a class="nav-link" data-bs-toggle="collapse" href="{% url 'manage_users' %}" aria-expanded="false" aria-controls="auth">
+          <i class="menu-icon mdi mdi-account-circle-outline"></i>
+          <span class="menu-title">Manage Users</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+<script>
+  jQuery('.nav-item.feedback').on('click', function(e){
+      window.location.href = "{% url 'manage_feedback' %}";
+  });
+  jQuery('.nav-item.users').on('click', function(e){
+    window.location.href = "{% url 'manage_users' %}";
+});
+</script>

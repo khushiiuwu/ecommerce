@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="product.css">
+    </head>
+<body>
+        <form method="POST" action="{% url 'updaterecord' product.id %}" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <label for="productname">Product Name:</label>
+            <input name="productname" value="{{ product.productname }}">
+            <br><br>
+            <label for="quantity">Quantity:</label>
+            <input name="quantity" value="{{ product.quantity }}">
+            <br><br>
+            <label for="status">Status:</label>
+            <input name="status" value="{{ product.status }}">
+            <br><br>
+            <label for="brand">Brand:</label>
+            <input name="brand" value="{{ product.brand }}">
+            <br><br> 
+            <label for="price">Price:</label>
+            <input name="price" value="{{ product.price }}">
+            <br><br> 
+            <label for="image">File:</label>
+            <input type="file" name="image" id="image">
+            <br><br>
+            <button type="submit"> Submit </button>
+            <img id="output">
+        </form>
+        
+    <script>
+        const element = document.getElementById("image");
+        element.addEventListener("change",myFunction);
+        function myFunction(event) {
+            var output = document.getElementById("output");
+            output.style.display = "block";
+            output.src = URL.createObjectURL(this.files[0]);
+        }
+    </script>
+</body>
+</html>

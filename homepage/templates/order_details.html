@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>VogueVault.</title>
+    <style>
+        .input.form-control.text-center.quantity-amount{
+            width: 30px !important;
+            height: 37px !important;
+        }
+        .border.rounded-4.mb-3.d-flex.justify-content-center {
+            height: 70%;
+        }
+
+        element.style{
+            height:100% !important;
+        }
+        .border.rounded-4.mb-3.d-flex.justify-content-center{
+            width:636px;
+            height:537px;
+        }
+
+    </style>
+    <style>
+            
+      .track-line {
+        height: 2px !important;
+        opacity: 1;
+        }
+        
+        .dot {
+        height: 10px;
+        width: 10px;
+        margin-left: 3px;
+        margin-right: 3px;
+        margin-top: 0px;
+        background-color: #112A46;
+        border-radius: 50%;
+        display: inline-block
+        }
+        
+        .big-dot {
+        height: 25px;
+        width: 25px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        background-color: #112A46;
+        border-radius: 50%;
+        display: inline-block;
+        }
+        
+        .big-dot i {
+        font-size: 12px;
+        }
+        
+        .card-stepper {
+        z-index: 0
+        }
+
+        img.orderimage {
+            width: 126px;
+            height: 135px;
+        }
+
+        .custom-border {
+          border: 100px solid #D3D3D3; /* Replace #000 with your desired border color */
+      }
+
+      hr{
+        background-color: lightgrey !important;
+      }
+
+        .trackcolor{
+          background-color: #122A46 !important;
+        }
+        
+    </style>
+    {% load static %}
+    <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/bootstrap.min.css' %}" rel="stylesheet">
+          <link href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet' %}">
+          <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/tiny-slider.css' %}" rel="stylesheet">
+          <link href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/css/style.css' %}" rel="stylesheet">
+         
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></script>
+          <title> My Orders </title>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        </head>
+<body>
+    <!-- Start Header/Navigation -->
+		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+			<div class="container">
+				<a class="navbar-brand" href="http://127.0.0.1:8000/home/">VogueVault<span>.</span></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li class="nav-item active">
+							<a class="nav-link" href="http://127.0.0.1:8000/home/">Home</a>
+						</li>
+						<li><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+						<li><a class="nav-link" href="{% url 'about_us' %}">About us</a></li>
+						<li><a class="nav-link" href="{% url 'contact_us' %}">Contact us</a></li>
+					</ul>
+					
+					
+					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+						<li><a class="nav-link" id="showcollapsed" href="#"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/search.svg' %}"></a></li>
+						<div class="dropdown">
+							<li>
+								<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/user.svg' %}"></a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li>
+                    <a class="nav-link useract" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/user.svg' %}"></a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="{% url 'user_profile' %}">User Profile</a></li>
+                      <li><a class="dropdown-item" href="{% url 'wishlist' %}">Wishlist</a></li>
+                      <li><a class="dropdown-item" href="{% url 'my_order' %}">Orders</a></li>
+                      <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                    </ul>
+                  </li>
+						  </div>
+						  <li><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/images/cart.svg' %}"></a></li>
+
+					</ul>
+				</div>
+			</div>
+				
+		</nav>
+		<!-- End Header/Navigation -->
+
+<!-- content -->
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container py-5 h-40">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-stepper" style="border-radius: 10px;">
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-column">
+                  <span class="lead fw-normal">{{order.products}}</span>
+                  <span class="text-muted small">Ordered on {{order.date}}</span>
+                  <span class="text-muted small ">Status:<span class="orderstatus"> {{order.status}}</span></span>
+
+                </div>
+                <div>
+                    {% load static %}
+                    <img class="orderimage" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/products/' %}{{order.img}}">   
+                </div>
+              </div>
+              <hr class="my-4">
+  
+              <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
+                <span class="dot Opending"></span>
+                <hr class="flex-fill track-line"><span class="dot OConfirmed"></span>
+                <hr class="flex-fill track-line"><span class="dot OFDelivery"></span>
+                <hr class="flex-fill track-line"><span class="d-flex justify-content-center align-items-center OD dot">
+                  <i class="fa fa-check text-white"></i></span>
+              </div>
+  
+              <div class="d-flex flex-row justify-content-between align-items-center">
+                <div class="d-flex flex-column align-items-start"><span>15 Mar</span><span>Order Pending</span>
+                </div>
+                <div class="d-flex flex-column justify-content-center"><span>15 Mar</span><span>Order
+                    Confirmed</span></div>
+                <div class="d-flex flex-column align-items-center"><span>15 Mar</span><span>Out for
+                    delivery</span></div>
+                <div class="d-flex flex-column align-items-end"><span>15 Mar</span><span>Delivered</span></div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- Footer -->
+
+<!-- End Footer Section -->
+    <script>
+      jQuery(document).ready(function($){
+          var orderstatus = $('.orderstatus').text().trim();
+          console.log(orderstatus);
+          if (orderstatus == "Pending"){
+            $('#myHr').addClass('custom-border');
+            $('.Opending').addClass('big-dot');
+          }
+          else if (orderstatus == "Order Confirmed"){
+            $('.OConfirmed').addClass( "big-dot");
+            $('.OConfirmed').prev( ".track-line" ).addClass("trackcolor");
+          }
+          else if(orderstatus == 'Out for Delivery') {
+            $('.OFDelivery').addClass( "big-dot");
+            $('.OConfirmed').prev( ".track-line" ).addClass("trackcolor");
+            $('.OFDelivery').prev( ".track-line" ).addClass("trackcolor");
+
+          }
+          else{
+            $('.OD').addClass( "big-dot");
+            $('.OConfirmed').prev( ".track-line" ).addClass("trackcolor");
+            $('.OFDelivery').prev( ".track-line" ).addClass("trackcolor");
+            $('.OD').prev( ".track-line" ).addClass("trackcolor");
+         
+          }
+      });
+    </script>
+    <!-- MDB -->
+    <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/tiny-slider.js' %}"></script>
+    <script src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/custom.js' %}"></script>
+    <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/mdb.min.js' %}"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/shop/js/script.js' %}"></script>
+</body>
+</html>
+

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> Product Description </title>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  {% load static %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typicons/typicons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/simple-line-icons/css/simple-line-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/css/vendor.bundle.base.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/select.dataTables.min.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/css/vertical-layout-light/style.css' %}">
+
+  <link rel="shortcut icon" type="text/css" href="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/images/favicon.png' %}" />
+</head>
+<body>
+        
+    <div class="container-scroller"> 
+        <!-- partial:partials/_navbar.html -->
+        {% include 'navbar.html' %}
+
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            {% include 'sidebar.html' %}
+
+
+            <!-- partial -->
+            
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% if messages %}
+                                        <div class="messages">
+                                            {% for message in messages %}
+                                                <div class="alert alert-{{ message.tags }}">
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>   
+                            </div>
+                        </div>
+            
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                              <div class="card-body">
+                                <h4 class="card-title"></h4>
+                                <p class="card-description"> </p>
+                                <form method="POST" action="{% url 'details' product.id %}" enctype='multipart/form-data'>
+                                  <div class="form-group">
+                                      <label for="productname">Product Name</label>
+                                      <input type="text" class="form-control" name="productname" id="id_productname" value="{{product.productname}}" placeholder="Product Name">
+                                  </div>  
+                                  <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="text" class="form-control" name="quantity" id="id_quantity" value="{{product.quantity}}" placeholder="Quantity">
+                                  </div>
+                                  <div class="form-group">
+                                  <label for="status">Status</label>
+                                    <select class="form-control" name="status" value="{{product.status}}" id="id_status">
+                                        <option value="Instock">Instock</option>
+                                        <option value="Outofstock">Out of Stock</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                        <label>Image Upload</label>
+                                        <input type="file" name="img[]" class="file-upload-default">
+                                        <div class="input-group col-xs-12">
+                                            <span class="input-group-append">
+                                                <input type="file" name="image" accept="image/*" name="image" id="id_image" value={{product.image}}><br><br>
+                                                <img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/products/' %}{{product.image}}" style="width: 173px; height: 165px; border-radius: 1px; border: 1px solid #000;">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Image Upload 2</label>
+                                        <input type="file" name="img[]" class="file-upload-default">
+                                        <div class="input-group col-xs-12">
+                                            <span class="input-group-append">
+                                                <input type="file" name="image2" accept="image/*" name="image2" id="id_image2" value={{product.image2}}><br><br>
+                                                <img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/products/' %}{{product.image2}}" style="width: 173px; height: 165px; border-radius: 1px; border: 1px solid #000;">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Image Upload 3</label>
+                                        <input type="file" name="img[]" class="file-upload-default">
+                                        <div class="input-group col-xs-12">
+                                            <span class="input-group-append">
+                                                <input type="file" name="image3" accept="image/*" name="image3" id="id_image3" value={{product.image3}}><br><br>
+                                                <img src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/products/' %}{{product.image3}}" style="width: 173px; height: 165px; border-radius: 1px; border: 1px solid #000;">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="price">Price</label>
+                                      <input type="text" class="form-control" name="price" id="id_price" value="{{product.price}}" placeholder="Price">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="productdescription">Product Description</label>
+                                      <input type="text" class="form-control" name="productdescription" id="id_productdescription" value="{{product.productdescription}}" placeholder="Product Description">
+                                    </div>
+                                      <div class="form-group">
+                                        <label for="Type">Type</label>
+                                        <input type="text" class="form-control" name="type" id="id_Type" value="{{product.Type}}" placeholder="Type">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="material"> Material </label>
+                                      <input type="text" class="form-control" name="material" id="id_material" value="{{product.material}}" placeholder="Material">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="color">Color </label>
+                                        <input type="text" class="form-control" name="color" id="id_color" value="{{product.color}}" placeholder="color">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="category"> Category </label>
+                                      <input type="text" class="form-control" name="category" id="id_category" value="{{product.category}}" placeholder="Category">
+                                    </div>
+                                        
+                                        <button type="submit" id="my-button" class="btn btn-primary me-2">Submit</button>
+                                        <button class="btn btn-light"><a href="{% url 'update_product' %}">Cancel</button>
+                                </form>
+                          </div>
+                        </div>
+                      </div>
+       
+                        <footer class="footer">
+                            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+                                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+  
+    {% load static %}
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+     <!-- inject:js -->
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/js/vendor.bundle.base.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/vendors/typeahead.js/typeahead.bundle.min.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/off-canvas.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/hoverable-collapse.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/template.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/settings.js' %}"></script>
+  <script type="text/javascript" src="{% static 'C:/Users/Khushi/Documents/ecareinfoway/mysite/Scripts/ecommerce/static/js/todolist.js' %}"></script>
+  <!-- endinject -->
+
+</body>
+</html>
