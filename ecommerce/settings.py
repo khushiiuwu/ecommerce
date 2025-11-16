@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 import mimetypes
+from dotenv import load_dotenv
 
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 mimetypes.add_type("text/css", ".css", True)
 
@@ -37,14 +40,14 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&hj0$(#!l1f58m1ily#+=%!!xey*f7^saam==r5!09pix+e=)^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
-
+RAZOR_KEY_ID = os.getenv("RAZOR_KEY_ID")
+RAZOR_KEY_SECRET = os.getenv("RAZOR_KEY_SECRET")
 # Application definition
 
 INSTALLED_APPS = [
@@ -59,8 +62,6 @@ INSTALLED_APPS = [
     'custom_admin'
 ]
 
-RAZOR_KEY_ID = "rzp_test_ko4NeDGTLuBTcX"
-RAZOR_KEY_SECRET = "wOLBoK3Js9bux61mOXzaR7rx"
 
 
 AUTH_USER_MODELS = 'homepage.registeruser'
@@ -79,16 +80,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'khushiii41123@gmail.com'
-EMAIL_HOST_PASSWORD = 'epod wvlo ezrt yint'
-
-#EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-#EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_HOST_USER = 'khushiii41123@gmail.com' #your email-id
-#EMAIL_HOST_PASSWORD = 'Khushi@23' #your password
-#EMAIL_PORT = 587
-#EMAIL_USE_TLS = True
-#EMAIL_USE_SSL = False
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
